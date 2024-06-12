@@ -3,7 +3,7 @@ import numpy as np  # NumPy'yı import ettik
 from sqlalchemy import create_engine #SQL bağlantısı 
 
 
-def csv_to_sql(csv_file:str, table_name:str, date, database_name:str):
+def csv_to_sql(csv_file:str, table_name:str, date, database_name:str, not_included:list):
 
     #SQL bağlantısı
     engine = create_engine(f"mysql+pymysql://remote:BIw883k8@212.31.2.93/{database_name}",
@@ -40,7 +40,7 @@ def csv_to_sql(csv_file:str, table_name:str, date, database_name:str):
     df['avgPageDuration'].replace("", None, inplace=True)
 
     #istenmeyen sütunların kaldır
-    drop_columns=["videoIds", "dateModified", "breadcrumb_list", "section"]
+    drop_columns = not_included
     for drop_column in drop_columns:
         df.drop(drop_column, axis=1, inplace=True)
     
@@ -51,7 +51,7 @@ def csv_to_sql(csv_file:str, table_name:str, date, database_name:str):
     print(f"{table_name} Güncellendi")    
 # İhtiyaçlara göre değiştirilecek kısım
 csv_to_sql(csv_file = "kicerikfull.csv", table_name = "kicerikfull", date = "2024-05-31 00:00:00",
-            database_name = "editorraporlari2")
+            database_name = "editorraporlari2", not_included = ["videoIds", "dateModified", "breadcrumb_list", "section"])
 
 
 
