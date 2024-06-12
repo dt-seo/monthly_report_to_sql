@@ -50,7 +50,7 @@ def csv_to_sql(csv_file:str, table_name:str, date, database_name:str):
     df.to_sql(f'{table_name}', engine, index=False, if_exists="append")
     print(f"{table_name} Güncellendi")    
 # İhtiyaçlara göre değiştirilecek kısım
-csv_to_sql(csv_file = "_05_02_2024.csv", table_name = "picerikfull", date = "2024-04-30 00:00:00",
+csv_to_sql(csv_file = "kicerikfull.csv", table_name = "kicerikfull", date = "2024-05-31 00:00:00",
             database_name = "editorraporlari2")
 
 
